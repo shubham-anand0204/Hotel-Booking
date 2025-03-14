@@ -3,7 +3,7 @@ Description
 
 The Hotel Booking Application is a full-stack web application designed to provide a seamless and efficient hotel reservation experience. Users can browse, filter, and book hotels securely, with real-time availability updates, payment processing, and image management. This project leverages modern technologies to create a reliable and user-friendly booking system.
 
-Features
+Features    
 
 User Authentication – Secure login and signup using JWT and HTTP-only cookies.
 

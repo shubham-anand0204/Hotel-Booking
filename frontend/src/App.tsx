@@ -1,16 +1,40 @@
-import { useState } from 'react'
-import Layout from './layouts/Layout'
-import { BrowserRouter } from 'react-router-dom'
+import { useState } from "react";
+import Layout from "./layouts/Layout";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
-
-const App = ()=>{
-  return(
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <Layout>
+          <p>Home Page</p>
+        </Layout>
+      ),
+    },
+    {
+      path: "/search",
+      element: (
+        <Layout>
+          <p>Search Page</p>
+        </Layout>
+      ),
+    },
+    {
+      path: "*",
+      element: <Navigate to="/" />,
+    },
+  ]);
+  return (
     <>
-   <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+      <RouterProvider router={router} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
