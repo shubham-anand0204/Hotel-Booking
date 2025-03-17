@@ -10,7 +10,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors());//By default it allows access from all origin
 
 app.use('/api/users',userRoutes);
 app.use("/api/auth",authRoutes)

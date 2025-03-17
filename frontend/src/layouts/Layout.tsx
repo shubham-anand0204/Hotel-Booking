@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode;//children is specially reserved for passing the props between the fragments
 };
 
 const Layout = ({ children }: Props) => {

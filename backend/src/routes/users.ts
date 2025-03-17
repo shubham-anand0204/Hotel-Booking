@@ -16,7 +16,7 @@ router.post(
     }),
   ],
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
+    const errors = validationResult(req);//If error returns an object
     if(!errors.isEmpty()){
       res.status(400).json({message:errors.array()});
     }
@@ -39,12 +39,12 @@ router.post(
         }
       );
 
-      res.cookie("authToken", token, {
+      res.cookie("authToken", token, {//Set the token in cookie named "authToken"
         httpOnly: true,
         secure: process.env.NODE_ENV == "production",
         maxAge: 86400000,
       });
-      res.sendStatus(200);
+      res.sendStatus(200);//For successful registration
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Something went wrong" });

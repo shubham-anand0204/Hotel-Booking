@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
 });
 
+
+
+//This is the hook for mongoose which runs before the document is saved to the database.
 userSchema.pre("save", async function (next){
   if(this.isModified('password')){
     this.password = await bcrypt.hash(this.password,8)
