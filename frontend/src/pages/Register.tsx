@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-
+import { useMutation } from "@tanstack/react-query";
+import * as apiClient from "../api-client";
+import { useAppContext } from "../contexts/AppContext";
 export type RegisterFormData = {
   firstName: string;
   lastName: string;
@@ -9,6 +11,8 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+  const { showToast } = useAppContext();
+
   const {
     register,
     watch,
@@ -16,8 +20,18 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
+  const mutation = useMutation({
+    mutationFn: apiClient.register,
+    onSuccess: () => {
+      showToast({ message: "Registration Success", type: "SUCCESS" });
+    },
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
+  });
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutation.mutate(data);
   });
 
   return (
@@ -26,7 +40,9 @@ const Register = () => {
         className="w-full max-w-lg bg-white shadow-md rounded-lg p-8"
         onSubmit={onSubmit}
       >
-        <h2 className="text-3xl font-bold text-center mb-6">Create an Account</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">
+          Create an Account
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <label className="text-gray-700 text-sm font-bold">
             First Name
@@ -35,7 +51,9 @@ const Register = () => {
               {...register("firstName", { required: "This field is required" })}
             />
             {errors.firstName && (
-              <span className="text-red-500 text-xs">{errors.firstName.message}</span>
+              <span className="text-red-500 text-xs">
+                {errors.firstName.message}
+              </span>
             )}
           </label>
           <label className="text-gray-700 text-sm font-bold">
@@ -45,7 +63,9 @@ const Register = () => {
               {...register("lastName", { required: "This field is required" })}
             />
             {errors.lastName && (
-              <span className="text-red-500 text-xs">{errors.lastName.message}</span>
+              <span className="text-red-500 text-xs">
+                {errors.lastName.message}
+              </span>
             )}
           </label>
         </div>
@@ -74,7 +94,9 @@ const Register = () => {
             })}
           />
           {errors.password && (
-            <span className="text-red-500 text-xs">{errors.password.message}</span>
+            <span className="text-red-500 text-xs">
+              {errors.password.message}
+            </span>
           )}
         </label>
         <label className="text-gray-700 text-sm font-bold mt-4 block">
@@ -93,7 +115,9 @@ const Register = () => {
             })}
           />
           {errors.confirmPassword && (
-            <span className="text-red-500 text-xs">{errors.confirmPassword.message}</span>
+            <span className="text-red-500 text-xs">
+              {errors.confirmPassword.message}
+            </span>
           )}
         </label>
         <button

@@ -9,13 +9,12 @@ import {
 import Register from "./pages/Register";
 
 const App = () => {
-  // The children prop is a special prop in React that represents the content nested between the opening and closing tags of a component.
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
         <Layout>
-          <p>Home Page</p> {/* This is passed as childeren to the Layout */}
+          <p>Home Page</p>
         </Layout>
       ),
     },

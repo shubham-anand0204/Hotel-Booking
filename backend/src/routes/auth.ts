@@ -35,12 +35,12 @@ router.post(
         { expiresIn: "1d" }
       );
 
-      res.cookie("authToken",token,{
-        httpOnly:true,
-        secure:process.env.NODE_ENV=="production",
-        maxAge:8600000
-      })
-      res.status(200).json({userId: user._id})
+      res.cookie("authToken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV == "production",
+        maxAge: 8600000,
+      });
+      res.status(200).json({ userId: user._id });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Something Went Wrong" });
