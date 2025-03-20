@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());//By default it allows access from all origin
 
-app.use('/api/users',userRoutes);
+app.use('/api/users',userRoutes);   
 app.use("/api/auth",authRoutes)
 
 
@@ -22,4 +22,4 @@ app.listen(5000,()=>{
 
 
 
-//For testing
+//For testing git shell
